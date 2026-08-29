@@ -1,0 +1,18 @@
+# Config consumed by src/03_extract_hidden_states.py.
+# Only the three fields below are read by the code:
+#   plm.model_path, environment.cuda_visible_devices, data.num_of_labels
+plm:
+  model_name: llama
+  # Local path or HuggingFace id of the target model.
+  model_path: meta-llama/Llama-2-7b-chat-hf
+  layer_num: 32          # transformer blocks; hidden states are layer_num + 1
+
+environment:
+  num_gpus: 1
+  cuda_visible_devices: [0]
+
+data:
+  task: regret
+  num_of_labels: 2       # answer stages stored per question
+  input_path: datasets
+  output_path: results/regret_7b

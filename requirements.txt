@@ -1,0 +1,28 @@
+# Two environments are relevant, and they are not the same one.
+#
+# Reported results: PyTorch 1.12 on 2 x NVIDIA L20 (48 GB), per the paper.
+# Re-verified here: Python 3.8.20, torch 2.4.1+cu121, transformers 4.46.3,
+#   scikit-learn 1.3.2, numpy 1.24.4, on a single RTX 4090. Stages 2, 3 and 5
+#   were run end to end in this environment; stages 1 and 4 call the OpenAI API
+#   and were not executed.
+#
+# The ranges below cover the verified environment. Pin torch==1.12.1 if you want
+# to match the original setup, but that combination has not been re-tested here.
+
+torch>=1.12,<3
+transformers>=4.31,<5
+accelerate>=0.20
+
+numpy>=1.21,<2
+pandas>=1.3
+scipy>=1.7
+scikit-learn>=1.0
+
+# Stages 1 and 4 use the legacy `openai.ChatCompletion` interface; the 1.x
+# client is not compatible.
+openai==0.28.1
+
+pyyaml>=5.4
+tqdm>=4.62
+matplotlib>=3.5
+seaborn>=0.11
